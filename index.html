@@ -49,33 +49,52 @@
     <h2>Hungry?</h2>
     <p>Now that you're hungry here are some of the mouth-watering food items that no one can resist to. This table gives
         information about the famous food items that are available in different parts of India.</p>
-        <table>
-            <tr>
-                <th>Item</th>
-                <th>Location</th>
-                <th>Amount</th>
-            </tr>
-            <tr>
-                <td>Biryani</td>
-                <td>Hyderabad</td>
-                <td>$3</td>
-            </tr>
-            <tr>
-                <td>Paav Bhaji</td>
-                <td>Mumbai</td>
-                <td>$1</td>
-            </tr>
-            <tr>
-                <td>Lassi</td>
-                <td>Punjab</td>
-                <td>$1</td>
-            </tr>
-            <tr>
-                <td>Paratha</td>
-                <td>Delhi</td>
-                <td>$2</td>
-            </tr>
-        </table>
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Location</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td>Biryani</td>
+            <td>Hyderabad</td>
+            <td>$3</td>
+        </tr>
+        <tr>
+            <td>Paav Bhaji</td>
+            <td>Mumbai</td>
+            <td>$1</td>
+        </tr>
+        <tr>
+            <td>Lassi</td>
+            <td>Punjab</td>
+            <td>$1</td>
+        </tr>
+        <tr>
+            <td>Paratha</td>
+            <td>Delhi</td>
+            <td>$2</td>
+        </tr>
+    </table>
+    <hr>
+    <h2>Area of Simple Polygons:</h2>
+    <blockquote>The formula to calculate the area of a regular polygon is, Area = (number of sides × length of one side
+        ×
+        apothem)/2, where the value of apothem can be calculated using the formula, Apothem = [(length of one side)/{2
+        ×(tan(180/number of sides))}].
+        For more information click <a href="https://www.cuemath.com/geometry/area-of-polygons/">here</a></blockquote>
+    <pre>
+        double area(const vector<point>& fig) {
+            double res = 0;
+            for (unsigned i = 0; i < fig.size(); i++) {
+                point p = i ? fig[i - 1] : fig.back();
+                point q = fig[i];
+                res += (p.x - q.x) * (p.y + q.y);
+            }
+            return fabs(res) / 2;
+        }
+    </pre>
+    <blockquote>For more methods click <a href="https://cp-algorithms.com/geometry/area-of-simple-polygon.html">here</a></blockquote>
 
 
 </body>
