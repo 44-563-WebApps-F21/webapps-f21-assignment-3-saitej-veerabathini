@@ -78,24 +78,39 @@
         </tr>
     </table>
     <hr>
-    <h2>Area of Simple Polygons:</h2>
-    <blockquote>The formula to calculate the area of a regular polygon is, Area = (number of sides × length of one side
-        ×
-        apothem)/2, where the value of apothem can be calculated using the formula, Apothem = [(length of one side)/{2
-        ×(tan(180/number of sides))}].
-        For more information click <a href="https://www.cuemath.com/geometry/area-of-polygons/">here</a></blockquote>
+    <h2>Robin-Karp Algorithm for string matching:</h2>
+    <blockquote>This algorithm is based on the concept of hashing, so if you are not familiar with string hashing, refer
+        to the string hashing article. This algorithm was authored by Rabin and Karp in 1987.
+        For more information click <a href="https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/">here</a></blockquote>
     <pre>
-        double area(const vector<point>& fig) {
-            double res = 0;
-            for (unsigned i = 0; i < fig.size(); i++) {
-                point p = i ? fig[i - 1] : fig.back();
-                point q = fig[i];
-                res += (p.x - q.x) * (p.y + q.y);
+        vector<int> rabin_karp(string const& s, string const& t) {
+            const int p = 31; 
+            const int m = 1e9 + 9;
+            int S = s.size(), T = t.size();
+        
+            vector<long long> p_pow(max(S, T)); 
+            p_pow[0] = 1; 
+            for (int i = 1; i < (int)p_pow.size(); i++) 
+                p_pow[i] = (p_pow[i-1] * p) % m;
+        
+            vector<long long> h(T + 1, 0); 
+            for (int i = 0; i < T; i++)
+                h[i+1] = (h[i] + (t[i] - 'a' + 1) * p_pow[i]) % m; 
+            long long h_s = 0; 
+            for (int i = 0; i < S; i++) 
+                h_s = (h_s + (s[i] - 'a' + 1) * p_pow[i]) % m; 
+        
+            vector<int> occurences;
+            for (int i = 0; i + S - 1 < T; i++) { 
+                long long cur_h = (h[i+S] + m - h[i]) % m; 
+                if (cur_h == h_s * p_pow[i] % m)
+                    occurences.push_back(i);
             }
-            return fabs(res) / 2;
+            return occurences;
         }
     </pre>
-    <blockquote>For more methods click <a href="https://cp-algorithms.com/geometry/area-of-simple-polygon.html">here</a></blockquote>
+    <blockquote>For more methods click <a href="https://cp-algorithms.com/string/rabin-karp.html">here</a>
+    </blockquote>
 
 
 </body>
